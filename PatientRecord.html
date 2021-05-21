@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      function pattt() {
+        var regular = document.getElementById("regular");
+        var discharge = document.getElementById("discharge");
+        var admit = document.getElementById("admit");
+        var operation = document.getElementById("operation");
+        var status = document.getElementById("patientStatus").value;
+        if (status == "Regular") {
+          regular.style.display = "block";
+          admit.style.display = "none";
+          operation.style.display = "none";
+          discharge.style.display = "none";
+        } else if (status == "Admit") {
+          regular.style.display = "none";
+          admit.style.display = "block";
+          operation.style.display = "none";
+          discharge.style.display = "none";
+        } else if (status == "Discharge") {
+          regular.style.display = "none";
+          admit.style.display = "none";
+          operation.style.display = "none";
+          discharge.style.display = "block";
+        } else if (status == "Operate") {
+          regular.style.display = "none";
+          operation.style.display = "block";
+          admit.style.display = "none";
+          discharge.style.display = "none";
+        }
+      }
+    </script>
+    <title>Patient Record</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <form action="AddPatRec.php" method="POST">
+        <h2>Add New Patient Record</h2>
+        <br />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fName">First Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fName"
+              name="firstname"
+              placeholder="First Name"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lName">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lName"
+              name="lastname"
+              placeholder="Last Name"
+              autocomplete="off"
+              ;
+            />
+          </div>
+        </div>
+        <div class="form-group col-md-12">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            placeholder="1234 Main St"
+          />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="phoneNumber">Phone Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="phoneNumber"
+              name="phoneNumber"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="city">City</label>
+            <select id="city" name="city" class="form-control">
+              <option selected>Select Your City</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Karachi">Karachi</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Peshawar">Peshawar</option>
+              <option value="Multan">Multan</option>
+              <option value="Gujranwala">Gujranwala</option>
+              <option value="Faislabad">Faislabad</option>
+              <option value="Quetta">Quetta</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" name="age" />
+          </div>
+        </div>
+        <div class="form-row col-md-12">
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="male"
+              value="M"
+              checked
+            />
+            <label class="form-check-label" for="male"> Male </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              value="F"
+              id="female"
+            />
+            <label class="form-check-label" for="female"> Female </label>
+          </div>
+          <br />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="rDoctor">Referred Doctor</label>
+            <input
+              type="text"
+              class="form-control"
+              id="rDoctor"
+              name="referredDoctor"
+              placeholder="Doc_Reg table must contain the referred doctor"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="deptName">Department Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="deptName"
+              name="departName"
+              placeholder="department table must contain the department name"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="checkupDate">Checkup Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="checkupDate"
+              name="checkupDate"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="treatment">treatment</label>
+            <input
+              type="text"
+              class="form-control"
+              id="treatment"
+              name="treatment"
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="patientStatus">Patient Status</label>
+            <select
+              id="patientStatus"
+              class="form-control"
+              onchange="pattt();"
+              name="patientStatus"
+            >
+              <option value="Regular">Regular Patient</option>
+              <option value="Admit">Patient Admit</option>
+              <option value="Discharge">Patient Discharge</option>
+              <option value="Operate">Patient Operation</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="diagnose">Diagnose</label>
+            <input
+              type="text"
+              class="form-control"
+              id="diagnose"
+              name="diagnose"
+            />
+          </div>
+        </div>
+        <div class="form-row" id="regular">
+          <div class="form-group col-md-4">
+            <label for="visitDate">Visit Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="visitDate"
+              name="visitDate"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="recMed">Recommeded Medicine</label>
+            <input
+              type="text"
+              class="form-control"
+              id="recMed"
+              name="recommendedMed"
+            />
+          </div>
+          <div class="form-group col-md-4">
+            <label for="treatmentStatus">Treatment Status</label>
+            <input
+              type="text"
+              class="form-control"
+              id="treatmentStatus"
+              name="treatmentStatus"
+            />
+          </div>
+        </div>
+        <div id="discharge">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="treatmentGiven">Treatment Given</label>
+              <input
+                type="text"
+                class="form-control"
+                id="treatGiven"
+                name="treatmentGiven"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="treatmentAdvice">Treatment Advice</label>
+              <input
+                type="text"
+                class="form-control"
+                id="treatAdvice"
+                name="treatAdvice"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="paymentMode">Payment Mode</label>
+              <select id="paymentMode" class="form-control" name="paymentMode">
+                <option selected>Select payment Mode</option>
+                <option>Cash</option>
+                <option>Online</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="paymentMade">Payment Made</label>
+              <input
+                type="text"
+                class="form-control"
+                id="paymentMade"
+                name="paymentMade"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dischargeDate">Discharge Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dischargeDate"
+                name="dischargeDate"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="admit">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="advancePayment">Advance Payment</label>
+              <input
+                type="text"
+                class="form-control"
+                id="advancePayment"
+                name="advancePayment"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="admissionDate">Admission Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="admissionDate"
+                name="admissionDate"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="paymentMode">Payment Mode</label>
+              <select id="paymentMode" class="form-control" name="paymentMode1">
+                <option selected>Mode</option>
+                <option>Cash</option>
+                <option>Online</option>
+              </select>
+            </div>
+            <div class="form-group col-md-5">
+              <label for="intialCondition">Initial Condition</label>
+              <input
+                type="text"
+                class="form-control"
+                id="initialCondition"
+                name="initialCondition"
+              />
+            </div>
+            <div class="form-group col-md-5">
+              <label for="attendantName">Attendant Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="attendantName"
+                name="attendantName"
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="roomType">Room Type</label>
+              <select id="roomType" class="form-control" name="roomType">
+                <option value="G" selected>General</option>
+                <option value="P">Private</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="roomStatus">Room Status</label>
+              <select id="roomStatus" class="form-control" name="roomStatus">
+                <option value="Y" selected>Occupied</option>
+                <option value="N">Not Occupied</option>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="chargesPerDay">Charges Per Day</label>
+              <input
+                type="number"
+                class="form-control"
+                id="chargesPerDay"
+                name="chargesPerDay"
+              />
+            </div>
+            <div class="form-group col-md-3">
+              <label for="noOfDoc">No. Of Doctor</label>
+              <input
+                type="Number"
+                class="form-control"
+                id="noOfDoc"
+                name="noOfDoc"
+              />
+            </div>
+          </div>
+        </div>
+        <div id="operation">
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="admissionDate1">Admission Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="admissionDate1"
+                name="admissionDate1"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="operationDate">Operation Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="operationDate"
+                name="operationDate"
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="operationType">Operation Type</label>
+              <input
+                type="text"
+                class="form-control"
+                id="operationType"
+                name="operationType"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="PCAfterOpr">Patient Condition</label>
+              <input
+                type="text"
+                class="form-control"
+                id="PCAfterOpr"
+                name="PCAfterOpr"
+                placeholder="Patient Condition After Operation"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="PCBeforeOpr">Patient Condition</label>
+              <input
+                type="text"
+                class="form-control"
+                id="PCBeforeOpr"
+                name="PCBeforeOpr"
+                placeholder="Patient Condition Before Operation"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="doctorInOpr">No. Of Doctors</label>
+              <input
+                type="number"
+                class="form-control"
+                id="doctorInOpr"
+                name="doctorInOpr"
+              />
+            </div>
+            <div class="form-group col-md-2">
+              <label for="theatreNum">Theatre Number</label>
+              <input
+                type="number"
+                class="form-control"
+                id="theatreNum"
+                name="theatreNum"
+              />
+            </div>
+            <div class="form-group col-md-8">
+              <label for="treatmentAdvice1">Treatment Advice</label>
+              <input
+                type="text"
+                class="form-control"
+                id="treatAdvice1"
+                name="treatmentAdvice1"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-row" style="padding-left: 1.5%">
+          <button
+            type="submit"
+            class="btn btn-success form-group col-md-1"
+            name="submit"
+          >
+            Submit
+          </button>
+          <a href="ShowPatRec.php"
+            >&nbsp;<button
+              type="button"
+              class="btn btn-success col-md-2 pull-right"
+              style="text-align: center"
+            >
+              View Patient Record
+            </button></a
+          >
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
